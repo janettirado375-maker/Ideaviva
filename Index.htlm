@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IDEA VIVA</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f5ff;
+      color: #202b50;
+      text-align: center;
+      padding: 30px 15px;
+    }
+
+    .contenedor {
+      max-width: 500px;
+      margin: 40px auto;
+      padding: 25px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px #00000015;
+    }
+
+    h1 {
+      color: #4659c9;
+      font-size: 36px;
+    }
+
+    input {
+      width: 90%;
+      padding: 13px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 13px 25px;
+      background: #4659c9;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    #resultado {
+      margin-top: 20px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="contenedor">
+    <h1>IDEA VIVA</h1>
+    <p>Plataforma inteligente de investigación y creatividad.</p>
+
+    <input id="busqueda" type="text"
+      placeholder="¿Qué deseas investigar?">
+
+    <br>
+
+    <button onclick="buscar()">Investigar</button>
+
+    <div id="resultado"></div>
+  </div>
+
+  <script>
+    function buscar() {
+      const consulta = document.getElementById("busqueda").value.trim();
+
+      if (consulta === "") {
+        document.getElementById("resultado").innerText =
+          "Escribe algo para comenzar.";
+      } else {
+        document.getElementById("resultado").innerText =
+          "Tu investigación sobre: " + consulta +
+          ". Próximamente tendrás más herramientas.";
+      }
+    }
+  </script>
+
+</body>
+</html>
