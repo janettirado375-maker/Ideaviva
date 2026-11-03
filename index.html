@@ -67,38 +67,42 @@
   <button onclick="buscar()">Explorar</button>
 
   <div id="resultado"></div>
+<section class="tarjetas">
 
-  <section class="tarjetas">
-    <div class="tarjeta">
-      <h2>🔎 Investigación</h2>
-      <p>Explora nuevas ideas.</p>
-    </div>
+  <button class="tarjeta" onclick="abrirHerramienta('investigacion')">
+    🔎 Investigación
+    <p>Explorar información</p>
+  </button>
 
-    <div class="tarjeta">
-      <h2>🧠 Inteligencia artificial</h2>
-      <p>Resuelve tus preguntas.</p>
-    </div>
+  <button class="tarjeta" onclick="abrirHerramienta('ia')">
+    🧠 IA inteligente
+    <p>Conversar con IA</p>
+  </button>
 
-    <div class="tarjeta">
-      <h2>🎨 Creatividad</h2>
-      <p>Desarrolla ideas visuales.</p>
-    </div>
+  <button class="tarjeta" onclick="abrirHerramienta('creatividad')">
+    🎨 Creatividad
+    <p>Crear imágenes</p>
+  </button>
 
-    <div class="tarjeta">
-      <h2>🎬 Vídeos</h2>
-      <p>Prepara contenido audiovisual.</p>
-    </div>
+  <button class="tarjeta" onclick="abrirHerramienta('videos')">
+    🎬 Vídeos
+    <p>Crear contenido</p>
+  </button>
 
-    <div class="tarjeta">
-      <h2>📚 Aprendizaje</h2>
-      <p>Aprende cosas nuevas.</p>
-    </div>
+  <button class="tarjeta" onclick="abrirHerramienta('aprendizaje')">
+    📚 Aprendizaje
+    <p>Aprender y practicar</p>
+  </button>
 
-    <div class="tarjeta">
-      <h2>💡 Proyectos</h2>
-      <p>Convierte ideas en proyectos.</p>
-    </div>
-  </section>
+  <button class="tarjeta" onclick="abrirHerramienta('proyectos')">
+    💡 Proyectos
+    <p>Desarrollar ideas</p>
+  </button>
+
+</section>
+
+<section id="panel-herramienta" class="tarjeta" style="display:none;">
+</section>
 </header>
   <div class="contenedor">
     <h1>IDEA VIVA</h1>
