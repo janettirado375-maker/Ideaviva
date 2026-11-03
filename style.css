@@ -84,3 +84,137 @@ button:hover {
     width: 100%;
   }
 }
+/* IDEA VIVA — Acabado Y3K profesional */
+
+:root {
+  --iv-blue: #398AFF;
+  --iv-violet: #9365FF;
+  --iv-magenta: #E642FF;
+  --iv-cyan: #45D9E8;
+  --iv-metal: #D8E2F2;
+}
+
+body {
+  background:
+    radial-gradient(ellipse at 80% 10%, #30205b55, transparent 35%),
+    radial-gradient(ellipse at 10% 90%, #123c6a44, transparent 40%),
+    #080D19;
+  color: #F4F6FF;
+}
+
+.sidebar {
+  background: linear-gradient(180deg, #101827, #090E19);
+  border-right: 1px solid #8C72FF55;
+  box-shadow: 8px 0 35px #6D42FF12;
+}
+
+.brand-icon {
+  color: var(--iv-metal);
+  text-shadow: 0 0 14px #8B5CFF;
+  background: linear-gradient(135deg, #263B69, #7D4CEB);
+  border: 1px solid #D8E2F255;
+}
+
+.nav-item {
+  border: 1px solid transparent;
+  transition: .25s ease;
+}
+
+.nav-item:hover,
+.nav-item.active {
+  background: linear-gradient(100deg, #38216C88, #172B4D);
+  border-color: #9A70FF77;
+  box-shadow: inset 3px 0 var(--iv-violet),
+              0 0 18px #974CFF22;
+}
+
+.hero {
+  border: 1px solid #8B72FF55;
+  background:
+    linear-gradient(120deg, #17243BEE, #17132CEE);
+  box-shadow: 0 15px 55px #0008,
+              0 0 35px #7544FF18;
+  border-radius: 20px;
+  padding: 35px;
+}
+
+.hero h1 span {
+  background: linear-gradient(90deg, #55C8FF, #A17AFF, #F06AFF);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 12px #A45BFF44);
+}
+
+.tool-card {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(145deg, #17243B, #101626);
+  border: 1px solid #7384A644;
+  border-radius: 16px;
+  transition: transform .3s ease,
+              border-color .3s ease,
+              box-shadow .3s ease;
+}
+
+.tool-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 30%,
+    #FFFFFF0C 48%, transparent 65%);
+  transform: translateX(-100%);
+  transition: transform .7s ease;
+  pointer-events: none;
+}
+
+.tool-card:hover::before {
+  transform: translateX(100%);
+}
+
+.tool-card:hover {
+  transform: translateY(-5px);
+  border-color: #A783FF;
+  box-shadow: 0 12px 35px #824CFF30,
+              inset 0 0 20px #8C58FF12;
+}
+
+.tool-card.violet:hover {
+  box-shadow: 0 12px 35px #9365FF44;
+}
+
+.tool-card.pink:hover {
+  border-color: var(--iv-magenta);
+  box-shadow: 0 12px 35px #E642FF33;
+}
+
+.tool-card.blue:hover {
+  border-color: var(--iv-blue);
+  box-shadow: 0 12px 35px #398AFF33;
+}
+
+.tool-card.cyan:hover {
+  border-color: var(--iv-cyan);
+  box-shadow: 0 12px 35px #45D9E833;
+}
+
+.search-box {
+  border: 1px solid #8D76FF88;
+  box-shadow: 0 0 22px #8655FF20;
+  background: #0C1424;
+}
+
+.search-box:focus-within {
+  border-color: var(--iv-magenta);
+  box-shadow: 0 0 24px #E642FF33;
+}
+
+button {
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: .01ms !important;
+  }
+}
