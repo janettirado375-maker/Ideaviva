@@ -60,3 +60,29 @@ function abrirHerramienta(nombre) {
 function cerrarHerramienta() {
   document.getElementById("panel-herramienta").style.display = "none";
 }
+// IDEA VIVA — Navegación del espacio de trabajo
+
+function mostrar(id, boton) {
+  document.querySelectorAll(".workspace").forEach(seccion => {
+    seccion.classList.add("hidden");
+  });
+
+  const destino = document.getElementById(id);
+
+  if (destino) {
+    destino.classList.remove("hidden");
+  }
+
+  document.querySelectorAll(".nav-item").forEach(item => {
+    item.classList.remove("active");
+  });
+
+  if (boton) {
+    boton.classList.add("active");
+  } else {
+    const menu = document.querySelector(
+      `.nav-item[onclick*="'${id}'"]`
+    );
+    if (menu) menu.classList.add("active");
+  }
+}
