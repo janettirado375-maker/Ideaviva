@@ -52,7 +52,54 @@
   </style>
 </head>
 <body>
+<header class="contenedor">
+  <h1>IDEA VIVA</h1>
+  <p class="subtitulo">
+    Tu universo de inteligencia artificial
+  </p>
 
+  <input
+    type="text"
+    id="busqueda"
+    placeholder="¿Qué deseas descubrir hoy?"
+  >
+
+  <button onclick="buscar()">Explorar</button>
+
+  <div id="resultado"></div>
+
+  <section class="tarjetas">
+    <div class="tarjeta">
+      <h2>🔎 Investigación</h2>
+      <p>Explora nuevas ideas.</p>
+    </div>
+
+    <div class="tarjeta">
+      <h2>🧠 Inteligencia artificial</h2>
+      <p>Resuelve tus preguntas.</p>
+    </div>
+
+    <div class="tarjeta">
+      <h2>🎨 Creatividad</h2>
+      <p>Desarrolla ideas visuales.</p>
+    </div>
+
+    <div class="tarjeta">
+      <h2>🎬 Vídeos</h2>
+      <p>Prepara contenido audiovisual.</p>
+    </div>
+
+    <div class="tarjeta">
+      <h2>📚 Aprendizaje</h2>
+      <p>Aprende cosas nuevas.</p>
+    </div>
+
+    <div class="tarjeta">
+      <h2>💡 Proyectos</h2>
+      <p>Convierte ideas en proyectos.</p>
+    </div>
+  </section>
+</header>
   <div class="contenedor">
     <h1>IDEA VIVA</h1>
     <p>Plataforma inteligente de investigación y creatividad.</p>
