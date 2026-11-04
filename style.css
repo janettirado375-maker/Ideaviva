@@ -297,3 +297,64 @@ button {
   width: 100%;
   box-sizing: border-box;
 }
+/* ACCESO A IDEA VIVA */
+
+.pantalla-acceso {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: #080B18;
+}
+
+.caja-acceso {
+  width: 100%;
+  max-width: 400px;
+  padding: 30px 24px;
+  border: 1px solid #5555FF;
+  border-radius: 20px;
+  background: #151A30;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.caja-acceso h1 {
+  color: #8B7CFF;
+  font-size: 32px;
+}
+
+.caja-acceso h2 {
+  color: #FFFFFF;
+  font-size: 18px;
+  margin-bottom: 25px;
+}
+
+.caja-acceso input {
+  width: 100%;
+  padding: 14px;
+  margin: 8px 0;
+  border: 1px solid #444B70;
+  border-radius: 10px;
+  background: #090E20;
+  color: white;
+  box-sizing: border-box;
+}
+
+.caja-acceso button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #6558E8;
+  color: white;
+  font-weight: bold;
+}
+
+#mensaje-acceso {
+  color: white;
+  margin-top: 15px;
+  }
