@@ -178,3 +178,22 @@ async function iniciarSesion() {
 
   mensaje.textContent = "";
 }
+// IDEA VIVA — Comprobar sesión del usuario
+
+async function comprobarSesion() {
+  const { data, error } = await supabaseClient.auth.getSession();
+
+  if (error) {
+    console.error("Error al comprobar sesión:", error.message);
+    return;
+  }
+
+  if (data.session) {
+    document.getElementById("pantalla-acceso").style.display = "none";
+    mostrar("inicio");
+  } else {
+    document.getElementById("pantalla-acceso").style.display = "flex";
+  }
+}
+
+comprobarSesion();
