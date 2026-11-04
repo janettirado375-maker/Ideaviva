@@ -53,7 +53,32 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-  
+  <!-- ACCESO A IDEA VIVA -->
+<div id="pantalla-acceso" class="pantalla-acceso">
+  <div class="caja-acceso">
+    <h1>🧠 IDEA VIVA</h1>
+    <h2>Bienvenido a tu espacio inteligente</h2>
+
+    <input type="text" id="nombre-usuario"
+      placeholder="Tu nombre">
+
+    <input type="email" id="correo-usuario"
+      placeholder="Tu correo electrónico">
+
+    <input type="password" id="clave-usuario"
+      placeholder="Tu contraseña">
+
+    <button onclick="registrarUsuario()">
+      Crear mi cuenta
+    </button>
+
+    <button onclick="iniciarSesion()">
+      Iniciar sesión
+    </button>
+
+    <p id="mensaje-acceso"></p>
+  </div>
+</div>
 <div class="app-layout">
   <aside class="sidebar">
     <div class="brand">
