@@ -211,3 +211,33 @@ async function cerrarSesionUsuario() {
   document.getElementById("pantalla-acceso").style.display = "flex";
   mostrar("inicio");
 }
+// IDEA VIVA — Guardar proyectos
+
+async function guardarProyecto(nombre, contenido) {
+  const { data: sesion } = await supabaseClient.auth.getSession();
+
+  const usuario = sesion.session?.user;
+
+  if (!usuario) {
+    alert("Debes iniciar sesión primero.");
+    return;
+  }
+
+  const { data, error } = await supabaseClient
+    .from("proyectos")
+    .insert([
+      {
+        usuario_id: usuario.id,
+        nombre: nombre,
+        contenido: contenido
+      }
+    ]);
+
+  if (error) {
+    console.error("Error al guardar:", error.message);
+    alert("No se pudo guardar el proyecto.");
+    return;
+  }
+
+  alert("¡Proyecto guardado correctamente!");
+}
