@@ -1,17 +1,21 @@
+/* ==========================================
+   IDEA VIVA — SISTEMA PRINCIPAL
+   ========================================== */
+
+
+/* 1. BÚSQUEDA */
+
 function buscar() {
   const campo = document.getElementById("busqueda");
   const resultado = document.getElementById("resultado");
 
-  if (!campo || !resultado) {
-    console.error("No se encontraron los elementos de búsqueda.");
-    return;
-  }
+  if (!campo || !resultado) return;
 
   const consulta = campo.value.trim();
 
   resultado.replaceChildren();
 
-  if (consulta === "") {
+  if (!consulta) {
     resultado.textContent = "Escribe una pregunta para comenzar.";
     return;
   }
@@ -29,8 +33,13 @@ function buscar() {
   resultado.append(titulo, pregunta, aviso);
 }
 
+
+/* 2. HERRAMIENTAS */
+
 function abrirHerramienta(nombre) {
   const panel = document.getElementById("panel-herramienta");
+
+  if (!panel) return;
 
   const herramientas = {
     investigacion: {
@@ -63,23 +72,32 @@ function abrirHerramienta(nombre) {
 
   if (!herramienta) return;
 
-  panel.innerHTML = `
-    <h2>${herramienta.titulo}</h2>
-    <p>${herramienta.texto}</p>
-    <button onclick="cerrarHerramienta()">Volver</button>
-  `;
+  panel.replaceChildren();
 
+  const titulo = document.createElement("h2");
+  titulo.textContent = herramienta.titulo;
+
+  const texto = document.createElement("p");
+  texto.textContent = herramienta.texto;
+
+  const boton = document.createElement("button");
+  boton.textContent = "Volver";
+  boton.onclick = cerrarHerramienta;
+
+  panel.append(titulo, texto, boton);
   panel.style.display = "block";
   panel.scrollIntoView({ behavior: "smooth" });
 }
 
 function cerrarHerramienta() {
-  document.getElementById("panel-herramienta").style.display = "none";
+  const panel = document.getElementById("panel-herramienta");
+  if (panel) panel.style.display = "none";
 }
-// IDEA VIVA — Navegación del espacio de trabajo
+
+
+/* 3. NAVEGACIÓN */
 
 function mostrar(id, boton) {
-  destino.classList.remove("hidden");
   const destino = document.getElementById(id);
 
   if (!destino) {
@@ -92,9 +110,7 @@ function mostrar(id, boton) {
   });
 
   destino.classList.remove("hidden");
-if (id === "proyectos") {
-  cargarProyectos();
-}
+
   document.querySelectorAll(".nav-item").forEach(item => {
     item.classList.remove("active");
   });
@@ -107,17 +123,25 @@ if (id === "proyectos") {
     botonActivo.classList.add("active");
   }
 
+  if (id === "proyectos") {
+    cargarProyectos();
+  }
+
   window.scrollTo({
     top: 0,
     behavior: "smooth"
   });
 }
 
-// IDEA VIVA — Conexión con Supabase
 
-const SUPABASE_URL = "https://wozyeqmxetrxwvuidtqw.supabase.co";
+/* 4. CONEXIÓN CON SUPABASE */
 
-const SUPABASE_ANON_KEY = "sb_publishable_np6F63W601c3VF0iHq9YrA_89S8bo7j";
+const SUPABASE_URL =
+  "https://wozyeqmxetrxwvuidtqw.supabase.co";
+
+// Conserva aquí tu clave pública publishable actual.
+const SUPABASE_ANON_KEY =
+  "sb_publishable_np6F63W601c3VF0iHq9YrA_89S8bo7j";
 
 if (!window.supabase) {
   throw new Error(
@@ -130,24 +154,26 @@ const supabaseClient = window.supabase.createClient(
   SUPABASE_ANON_KEY
 );
 
+
+/* 5. COMPROBAR CONEXIÓN */
+
 async function probarConexion() {
-  const { data, error } = await supabaseClient
+  const { error } = await supabaseClient
     .from("proyectos")
     .select("id")
     .limit(1);
 
   if (error) {
-    console.error("Error de conexión:", error.message);
+    console.error("Error al consultar Supabase:", error.message);
     return false;
   }
 
-  console.log("IDEA VIVA está conectada correctamente a Supabase.");
+  console.log("Consulta a Supabase realizada correctamente.");
   return true;
 }
 
-probarConexion();
 
-// IDEA VIVA — Registro de usuarios
+/* 6. REGISTRO DE USUARIOS */
 
 async function registrarUsuario() {
   const nombre = document.getElementById("nombre-usuario").value.trim();
@@ -161,17 +187,19 @@ async function registrarUsuario() {
   }
 
   if (clave.length < 8) {
-    mensaje.textContent = "La contraseña debe tener al menos 8 caracteres.";
+    mensaje.textContent =
+      "La contraseña debe tener al menos 8 caracteres.";
     return;
   }
 
   mensaje.textContent = "Creando tu cuenta...";
 
-  const { data, error } = await supabaseClient.auth.signUp({
+  const { error } = await supabaseClient.auth.signUp({
     email: correo,
     password: clave,
     options: {
-      emailRedirectTo: "https://janettirado375-maker.github.io/Ideaviva/",
+      emailRedirectTo:
+        "https://janettirado375-maker.github.io/Ideaviva/",
       data: {
         nombre: nombre
       }
@@ -186,7 +214,9 @@ async function registrarUsuario() {
   mensaje.textContent =
     "Cuenta creada. Revisa tu correo para confirmar el registro.";
 }
-// IDEA VIVA — Inicio de sesión
+
+
+/* 7. INICIAR SESIÓN */
 
 async function iniciarSesion() {
   const correo = document.getElementById("correo-usuario").value.trim();
@@ -200,7 +230,7 @@ async function iniciarSesion() {
 
   mensaje.textContent = "Iniciando sesión...";
 
-  const { data, error } = await supabaseClient.auth.signInWithPassword({
+  const { error } = await supabaseClient.auth.signInWithPassword({
     email: correo,
     password: clave
   });
@@ -213,10 +243,11 @@ async function iniciarSesion() {
   document.getElementById("pantalla-acceso").style.display = "none";
 
   mostrar("inicio");
-
   mensaje.textContent = "";
 }
-// IDEA VIVA — Comprobar sesión del usuario
+
+
+/* 8. COMPROBAR SESIÓN */
 
 async function comprobarSesion() {
   const { data, error } = await supabaseClient.auth.getSession();
@@ -234,8 +265,8 @@ async function comprobarSesion() {
   }
 }
 
-comprobarSesion();
-// IDEA VIVA — Cerrar sesión
+
+/* 9. CERRAR SESIÓN */
 
 async function cerrarSesionUsuario() {
   const { error } = await supabaseClient.auth.signOut();
@@ -248,37 +279,9 @@ async function cerrarSesionUsuario() {
   document.getElementById("pantalla-acceso").style.display = "flex";
   mostrar("inicio");
 }
-// IDEA VIVA — Guardar proyectos
 
-async function guardarProyecto(nombre, contenido) {
-  const { data: sesion } = await supabaseClient.auth.getSession();
 
-  const usuario = sesion.session?.user;
-
-  if (!usuario) {
-    alert("Debes iniciar sesión primero.");
-    return;
-  }
-
-  const { data, error } = await supabaseClient
-    .from("proyectos")
-    .insert([
-      {
-        usuario_id: usuario.id,
-        nombre: nombre,
-        contenido: contenido
-      }
-    ]);
-
-  if (error) {
-    console.error("Error al guardar:", error.message);
-    alert("No se pudo guardar el proyecto.");
-    return;
-  }
-
-  alert("¡Proyecto guardado correctamente!");
-}
-// IDEA VIVA — Guardar proyectos
+/* 10. GUARDAR PROYECTOS */
 
 async function guardarProyecto(nombre, contenido) {
   nombre = nombre.trim();
@@ -313,13 +316,14 @@ async function guardarProyecto(nombre, contenido) {
 
   alert("¡Proyecto guardado correctamente!");
 
-  await cargarProyectos();
-
   document.getElementById("nombre-proyecto").value = "";
   document.getElementById("contenido-proyecto").value = "";
+
+  await cargarProyectos();
 }
 
-// IDEA VIVA — Mostrar proyectos guardados
+
+/* 11. MOSTRAR PROYECTOS */
 
 async function cargarProyectos() {
   const lista = document.getElementById("lista-proyectos");
@@ -369,3 +373,9 @@ async function cargarProyectos() {
     lista.appendChild(tarjeta);
   });
 }
+
+
+/* 12. INICIAR SISTEMA */
+
+comprobarSesion();
+               
