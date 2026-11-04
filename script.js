@@ -90,7 +90,7 @@ function mostrar(id, boton) {
 
 const SUPABASE_URL = "https://wozyeqmxetrxwvuidtqw.supabase.co";
 
-const SUPABASE_ANON_KEY = sb_publishable_np6F63W601c3VF0iHq9YrA_89S8bo7j;
+const SUPABASE_ANON_KEY = "sb_publishable_np6F63W601c3VF0iHq9YrA_89S8bo7j";
 
 const supabaseClient = window.supabase.createClient(
   SUPABASE_URL,
