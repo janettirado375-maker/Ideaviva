@@ -270,3 +270,30 @@ button {
     padding: 14px;
   }
 }
+/* CORRECCIÓN DE ESTRUCTURA IDEA VIVA */
+
+.app-layout {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: stretch;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.app-layout > .sidebar {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 250px;
+  width: 250px;
+}
+
+.app-layout > .main-content {
+  display: block;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.app-layout header {
+  width: 100%;
+  box-sizing: border-box;
+}
