@@ -52,6 +52,31 @@
   </style>
 </head>
 <body>
+  
+<div class="app-layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-icon">✦</div>
+      <h2>IDEA VIVA</h2>
+    </div>
+
+    <p class="menu-label">MENÚ PRINCIPAL</p>
+
+    <button class="nav-item active" onclick="mostrar('inicio', this)">⌂ Inicio</button>
+    <button class="nav-item" onclick="mostrar('investigacion', this)">⌕ Investigación</button>
+    <button class="nav-item" onclick="mostrar('ia', this)">✧ IA inteligente</button>
+    <button class="nav-item" onclick="mostrar('creatividad', this)">✎ Creatividad</button>
+    <button class="nav-item" onclick="mostrar('videos', this)">▷ Vídeos</button>
+    <button class="nav-item" onclick="mostrar('aprendizaje', this)">▤ Aprendizaje</button>
+    <button class="nav-item" onclick="mostrar('proyectos', this)">◇ Proyectos</button>
+
+    <div class="sidebar-bottom">
+      <button class="nav-item" onclick="mostrar('configuracion', this)">⚙ Configuración</button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    
 <header class="contenedor">
   <h1>IDEA VIVA</h1>
   <p class="subtitulo">
@@ -117,7 +142,8 @@
 
     <div id="resultado"></div>
   </div>
-
+  </main>
+</div>
   <script>
     function buscar() {
       const consulta = document.getElementById("busqueda").value.trim();
@@ -134,8 +160,5 @@
   </script>
 <link rel="stylesheet" href="style.css">
 <script src="script.js"></script>
-</body>
   <div id="notificacion-idea-viva" class="notificacion">
   IDEA VIVA · Tu espacio inteligente
-  </div>
-</html>
