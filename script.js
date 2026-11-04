@@ -79,6 +79,7 @@ function cerrarHerramienta() {
 // IDEA VIVA — Navegación del espacio de trabajo
 
 function mostrar(id, boton) {
+  destino.classList.remove("hidden");
   const destino = document.getElementById(id);
 
   if (!destino) {
@@ -91,7 +92,9 @@ function mostrar(id, boton) {
   });
 
   destino.classList.remove("hidden");
-
+if (id === "proyectos") {
+  cargarProyectos();
+}
   document.querySelectorAll(".nav-item").forEach(item => {
     item.classList.remove("active");
   });
@@ -274,4 +277,95 @@ async function guardarProyecto(nombre, contenido) {
   }
 
   alert("¡Proyecto guardado correctamente!");
+}
+// IDEA VIVA — Guardar proyectos
+
+async function guardarProyecto(nombre, contenido) {
+  nombre = nombre.trim();
+  contenido = contenido.trim();
+
+  if (!nombre || !contenido) {
+    alert("Escribe el nombre y el contenido del proyecto.");
+    return;
+  }
+
+  const { data: sesion } = await supabaseClient.auth.getSession();
+  const usuario = sesion.session?.user;
+
+  if (!usuario) {
+    alert("Debes iniciar sesión primero.");
+    return;
+  }
+
+  const { error } = await supabaseClient
+    .from("proyectos")
+    .insert([{
+      usuario_id: usuario.id,
+      nombre: nombre,
+      contenido: contenido
+    }]);
+
+  if (error) {
+    console.error("Error al guardar:", error.message);
+    alert("No se pudo guardar el proyecto.");
+    return;
+  }
+
+  alert("¡Proyecto guardado correctamente!");
+
+  await cargarProyectos();
+
+  document.getElementById("nombre-proyecto").value = "";
+  document.getElementById("contenido-proyecto").value = "";
+}
+
+// IDEA VIVA — Mostrar proyectos guardados
+
+async function cargarProyectos() {
+  const lista = document.getElementById("lista-proyectos");
+
+  if (!lista) return;
+
+  const { data: sesion } = await supabaseClient.auth.getSession();
+  const usuario = sesion.session?.user;
+
+  if (!usuario) {
+    lista.textContent = "Inicia sesión para ver tus proyectos.";
+    return;
+  }
+
+  lista.textContent = "Cargando tus proyectos...";
+
+  const { data, error } = await supabaseClient
+    .from("proyectos")
+    .select("id, nombre, contenido, creado_en")
+    .eq("usuario_id", usuario.id)
+    .order("creado_en", { ascending: false });
+
+  if (error) {
+    console.error("Error al cargar proyectos:", error.message);
+    lista.textContent = "No se pudieron cargar tus proyectos.";
+    return;
+  }
+
+  lista.replaceChildren();
+
+  if (!data || data.length === 0) {
+    lista.textContent = "Todavía no tienes proyectos guardados.";
+    return;
+  }
+
+  data.forEach(proyecto => {
+    const tarjeta = document.createElement("article");
+    tarjeta.className = "tarjeta-proyecto";
+
+    const titulo = document.createElement("h3");
+    titulo.textContent = proyecto.nombre;
+
+    const texto = document.createElement("p");
+    texto.textContent = proyecto.contenido;
+
+    tarjeta.append(titulo, texto);
+    lista.appendChild(tarjeta);
+  });
 }
