@@ -1,18 +1,35 @@
+
 function buscar() {
-  const consulta = document.getElementById("busqueda").value.trim();
+  const campo = document.getElementById("busqueda");
   const resultado = document.getElementById("resultado");
 
-  if (consulta === "") {
-    resultado.innerText = "Escribe una pregunta para comenzar.";
+  if (!campo || !resultado) {
+    console.error("No se encontraron los elementos de búsqueda.");
     return;
   }
 
-  resultado.innerHTML = `
-    <h3>IDEA VIVA está lista para ayudarte</h3>
-    <p>Tu consulta: ${consulta}</p>
-    <p>Pronto conectaremos nuestro motor de inteligencia artificial.</p>
-  `;
+  const consulta = campo.value.trim();
+
+  resultado.replaceChildren();
+
+  if (consulta === "") {
+    resultado.textContent = "Escribe una pregunta para comenzar.";
+    return;
+  }
+
+  const titulo = document.createElement("h3");
+  titulo.textContent = "IDEA VIVA está lista para ayudarte";
+
+  const pregunta = document.createElement("p");
+  pregunta.textContent = "Tu consulta: " + consulta;
+
+  const aviso = document.createElement("p");
+  aviso.textContent =
+    "Pronto conectaremos nuestro motor de inteligencia artificial.";
+
+  resultado.append(titulo, pregunta, aviso);
 }
+
 function abrirHerramienta(nombre) {
   const panel = document.getElementById("panel-herramienta");
 
