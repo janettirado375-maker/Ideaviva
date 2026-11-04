@@ -109,3 +109,4 @@ async function probarConexion() {
 
   console.log("¡IDEA VIVA está conectada a Supabase!", data);
 }
+probarConexion();
