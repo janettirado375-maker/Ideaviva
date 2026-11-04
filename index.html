@@ -158,36 +158,12 @@
 <section id="panel-herramienta" class="tarjeta" style="display:none;">
 </section>
 </header>
-  <div class="contenedor">
-    <h1>IDEA VIVA</h1>
-    <p>Plataforma inteligente de investigación y creatividad.</p>
-
-    <input id="busqueda" type="text"
-      placeholder="¿Qué deseas investigar?">
-
-    <br>
-
-    <button onclick="buscar()">Investigar</button>
-
-    <div id="resultado"></div>
-  </div>
   </main>
 </div>
-  <script>
-    function buscar() {
-      const consulta = document.getElementById("busqueda").value.trim();
-
-      if (consulta === "") {
-        document.getElementById("resultado").innerText =
-          "Escribe algo para comenzar.";
-      } else {
-        document.getElementById("resultado").innerText =
-          "Tu investigación sobre: " + consulta +
-          ". Próximamente tendrás más herramientas.";
-      }
-    }
-  </script>
 <link rel="stylesheet" href="style.css">
 <script src="script.js"></script>
   <div id="notificacion-idea-viva" class="notificacion">
   IDEA VIVA · Tu espacio inteligente
+  </div>
+</body>
+</html>
