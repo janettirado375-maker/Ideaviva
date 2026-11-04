@@ -1,4 +1,3 @@
-
 function buscar() {
   const campo = document.getElementById("busqueda");
   const resultado = document.getElementById("resultado");
@@ -80,29 +79,37 @@ function cerrarHerramienta() {
 // IDEA VIVA — Navegación del espacio de trabajo
 
 function mostrar(id, boton) {
+  const destino = document.getElementById(id);
+
+  if (!destino) {
+    console.warn("No existe el módulo:", id);
+    return;
+  }
+
   document.querySelectorAll(".workspace").forEach(seccion => {
     seccion.classList.add("hidden");
   });
 
-  const destino = document.getElementById(id);
-
-  if (destino) {
-    destino.classList.remove("hidden");
-  }
+  destino.classList.remove("hidden");
 
   document.querySelectorAll(".nav-item").forEach(item => {
     item.classList.remove("active");
   });
 
-  if (boton) {
-    boton.classList.add("active");
-  } else {
-    const menu = document.querySelector(
-      `.nav-item[onclick*="'${id}'"]`
-    );
-    if (menu) menu.classList.add("active");
+  const botonActivo = boton || document.querySelector(
+    `.nav-item[onclick*="'${id}'"]`
+  );
+
+  if (botonActivo) {
+    botonActivo.classList.add("active");
   }
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 }
+
 // IDEA VIVA — Conexión con Supabase
 
 const SUPABASE_URL = "https://wozyeqmxetrxwvuidtqw.supabase.co";
