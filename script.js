@@ -134,9 +134,11 @@ async function registrarUsuario() {
     email: correo,
     password: clave,
     options: {
-      data: {
-        nombre: nombre
-      }
+  emailRedirectTo: "https://janettirado375-maker.github.io/Ideaviva/",
+  data: {
+    nombre: nombre
+  }
+    }
     }
   });
 
