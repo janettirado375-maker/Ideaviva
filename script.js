@@ -374,7 +374,6 @@ async function cargarProyectos() {
   });
 }
 
-
 /* 12. INICIAR SISTEMA */
 
 comprobarSesion();
