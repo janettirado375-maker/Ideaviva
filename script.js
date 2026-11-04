@@ -116,24 +116,16 @@ const SUPABASE_URL = "https://wozyeqmxetrxwvuidtqw.supabase.co";
 
 const SUPABASE_ANON_KEY = "sb_publishable_np6F63W601c3VF0iHq9YrA_89S8bo7j";
 
+if (!window.supabase) {
+  throw new Error(
+    "No se pudo cargar Supabase. Comprueba tu conexión."
+  );
+}
+
 const supabaseClient = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_ANON_KEY
 );
-async function probarConexion() {
-  const { data, error } = await supabaseClient
-    .from("proyectos")
-    .select("id")
-    .limit(1);
-
-  if (error) {
-    console.error("Error de conexión:", error.message);
-    return;
-  }
-
-  console.log("¡IDEA VIVA está conectada a Supabase!", data);
-}
-probarConexion();
 // IDEA VIVA — Registro de usuarios
 
 async function registrarUsuario() {
