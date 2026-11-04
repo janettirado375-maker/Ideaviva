@@ -148,3 +148,33 @@ async function registrarUsuario() {
   mensaje.textContent =
     "Cuenta creada. Revisa tu correo para confirmar el registro.";
 }
+// IDEA VIVA — Inicio de sesión
+
+async function iniciarSesion() {
+  const correo = document.getElementById("correo-usuario").value.trim();
+  const clave = document.getElementById("clave-usuario").value;
+  const mensaje = document.getElementById("mensaje-acceso");
+
+  if (!correo || !clave) {
+    mensaje.textContent = "Escribe tu correo y contraseña.";
+    return;
+  }
+
+  mensaje.textContent = "Iniciando sesión...";
+
+  const { data, error } = await supabaseClient.auth.signInWithPassword({
+    email: correo,
+    password: clave
+  });
+
+  if (error) {
+    mensaje.textContent = error.message;
+    return;
+  }
+
+  document.getElementById("pantalla-acceso").style.display = "none";
+
+  mostrar("inicio");
+
+  mensaje.textContent = "";
+}
