@@ -126,6 +126,24 @@ const supabaseClient = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_ANON_KEY
 );
+
+async function probarConexion() {
+  const { data, error } = await supabaseClient
+    .from("proyectos")
+    .select("id")
+    .limit(1);
+
+  if (error) {
+    console.error("Error de conexión:", error.message);
+    return false;
+  }
+
+  console.log("IDEA VIVA está conectada correctamente a Supabase.");
+  return true;
+}
+
+probarConexion();
+
 // IDEA VIVA — Registro de usuarios
 
 async function registrarUsuario() {
