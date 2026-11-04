@@ -218,3 +218,55 @@ button {
     transition-duration: .01ms !important;
   }
 }
+/* IDEA VIVA — Distribución principal */
+
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  align-items: stretch;
+}
+
+.sidebar {
+  width: 250px;
+  min-width: 250px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px;
+  box-sizing: border-box;
+}
+
+.main-content {
+  flex: 1;
+  min-width: 0;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+.sidebar .nav-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin: 5px 0;
+  padding: 13px;
+  border-radius: 10px;
+  color: #F4F6FF;
+  background: transparent;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+}
+
+@media (max-width: 700px) {
+  .sidebar {
+    width: 155px;
+    min-width: 155px;
+    padding: 12px 8px;
+  }
+
+  .main-content {
+    padding: 14px;
+  }
+}
