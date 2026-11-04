@@ -197,3 +197,16 @@ async function comprobarSesion() {
 }
 
 comprobarSesion();
+// IDEA VIVA — Cerrar sesión
+
+async function cerrarSesionUsuario() {
+  const { error } = await supabaseClient.auth.signOut();
+
+  if (error) {
+    alert("No se pudo cerrar la sesión.");
+    return;
+  }
+
+  document.getElementById("pantalla-acceso").style.display = "flex";
+  mostrar("inicio");
+}
