@@ -110,3 +110,41 @@ async function probarConexion() {
   console.log("¡IDEA VIVA está conectada a Supabase!", data);
 }
 probarConexion();
+// IDEA VIVA — Registro de usuarios
+
+async function registrarUsuario() {
+  const nombre = document.getElementById("nombre-usuario").value.trim();
+  const correo = document.getElementById("correo-usuario").value.trim();
+  const clave = document.getElementById("clave-usuario").value;
+  const mensaje = document.getElementById("mensaje-acceso");
+
+  if (!nombre || !correo || !clave) {
+    mensaje.textContent = "Completa todos los campos.";
+    return;
+  }
+
+  if (clave.length < 8) {
+    mensaje.textContent = "La contraseña debe tener al menos 8 caracteres.";
+    return;
+  }
+
+  mensaje.textContent = "Creando tu cuenta...";
+
+  const { data, error } = await supabaseClient.auth.signUp({
+    email: correo,
+    password: clave,
+    options: {
+      data: {
+        nombre: nombre
+      }
+    }
+  });
+
+  if (error) {
+    mensaje.textContent = error.message;
+    return;
+  }
+
+  mensaje.textContent =
+    "Cuenta creada. Revisa tu correo para confirmar el registro.";
+}
