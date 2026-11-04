@@ -105,7 +105,28 @@
   </aside>
 
   <main class="main-content">
-    
+    <section id="proyectos" class="workspace hidden">
+  <h1>💡 Mis proyectos</h1>
+  <p>Guarda y organiza tus ideas.</p>
+
+  <input
+    type="text"
+    id="nombre-proyecto"
+    placeholder="Nombre de tu proyecto"
+  >
+
+  <textarea
+    id="contenido-proyecto"
+    placeholder="Escribe aquí tu idea..."
+  ></textarea>
+
+  <button onclick="guardarProyecto(
+    document.getElementById('nombre-proyecto').value,
+    document.getElementById('contenido-proyecto').value
+  )">
+    💾 Guardar proyecto
+  </button>
+    </section>
 <header class="contenedor">
   <h1>IDEA VIVA</h1>
   <p class="subtitulo">
