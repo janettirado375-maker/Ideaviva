@@ -458,4 +458,44 @@ async function eliminarProyecto(id) {
 /* 12. INICIAR SISTEMA */
 
 comprobarSesion();
-               
+ 
+/* IDEA VIVA — Buscar proyectos */
+
+function filtrarProyectos() {
+  const campo = document.getElementById("buscar-proyecto");
+  const lista = document.getElementById("lista-proyectos");
+
+  if (!campo || !lista) return;
+
+  const consulta = campo.value.trim().toLowerCase();
+
+  const tarjetas = lista.querySelectorAll(".tarjeta-proyecto");
+
+  let encontrados = 0;
+
+  tarjetas.forEach(tarjeta => {
+    const contenido = tarjeta.textContent.toLowerCase();
+
+    if (contenido.includes(consulta)) {
+      tarjeta.style.display = "";
+      encontrados++;
+    } else {
+      tarjeta.style.display = "none";
+    }
+  });
+
+  let aviso = document.getElementById("sin-resultados");
+
+  if (!aviso) {
+    aviso = document.createElement("p");
+    aviso.id = "sin-resultados";
+    lista.appendChild(aviso);
+  }
+
+  aviso.textContent = encontrados === 0
+    ? "No encontramos proyectos con esa búsqueda."
+    : "";
+
+  aviso.style.display = encontrados === 0 ? "block" : "none";
+}
+
