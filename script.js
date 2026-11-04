@@ -374,6 +374,87 @@ async function cargarProyectos() {
   });
 }
 
+/* IDEA VIVA — Editar proyectos */
+
+async function editarProyecto(id, nombreActual, contenidoActual) {
+  const nuevoNombre = prompt("Nuevo nombre del proyecto:", nombreActual);
+
+  if (nuevoNombre === null) return;
+
+  const nuevoContenido = prompt(
+    "Nuevo contenido del proyecto:",
+    contenidoActual
+  );
+
+  if (nuevoContenido === null) return;
+
+  if (!nuevoNombre.trim() || !nuevoContenido.trim()) {
+    alert("Completa el nombre y el contenido.");
+    return;
+  }
+
+  const { data: sesion } = await supabaseClient.auth.getSession();
+  const usuario = sesion.session?.user;
+
+  if (!usuario) {
+    alert("Debes iniciar sesión.");
+    return;
+  }
+
+  const { error } = await supabaseClient
+    .from("proyectos")
+    .update({
+      nombre: nuevoNombre.trim(),
+      contenido: nuevoContenido.trim(),
+      actualizado_en: new Date().toISOString()
+    })
+    .eq("id", id)
+    .eq("usuario_id", usuario.id);
+
+  if (error) {
+    console.error("Error al editar:", error.message);
+    alert("No se pudieron guardar los cambios.");
+    return;
+  }
+
+  alert("¡Proyecto actualizado!");
+  await cargarProyectos();
+}
+
+
+/* IDEA VIVA — Eliminar proyectos */
+
+async function eliminarProyecto(id) {
+  const confirmar = confirm(
+    "¿Seguro que deseas eliminar este proyecto?"
+  );
+
+  if (!confirmar) return;
+
+  const { data: sesion } = await supabaseClient.auth.getSession();
+  const usuario = sesion.session?.user;
+
+  if (!usuario) {
+    alert("Debes iniciar sesión.");
+    return;
+  }
+
+  const { error } = await supabaseClient
+    .from("proyectos")
+    .delete()
+    .eq("id", id)
+    .eq("usuario_id", usuario.id);
+
+  if (error) {
+    console.error("Error al eliminar:", error.message);
+    alert("No se pudo eliminar el proyecto.");
+    return;
+  }
+
+  alert("Proyecto eliminado.");
+  await cargarProyectos();
+}
+
 /* 12. INICIAR SISTEMA */
 
 comprobarSesion();
